@@ -5,7 +5,7 @@ import "log"
 // Privacy of the video
 type Privacy int
 
-// The privacy options : 1 = public , 2 = unlisted , 3 = private
+// The privacy options : public , unlisted ,  private
 const (
 	Public Privacy = iota
 	Unlisted
