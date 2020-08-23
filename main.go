@@ -1,14 +1,20 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
+	"os"
+	"youtube/models"
 	"youtube/services"
 )
 
 func main() {
-	//fmt.Println("Hello World")
-	fmt.Println(services.DateToDay("2020-07-14"))
-	//list := services.ListVideos(`C:\Users\Omri\Desktop\records`)
-	//services.UploadToYoutube(list)
+	jsonFile, _ := os.Open("./data/schedule.json")
+	data, _ := ioutil.ReadAll(jsonFile)
+	var lessons []models.Lesson
+	json.Unmarshal([]byte(data), &lessons)
+	list := services.ListVideos(`C:\Users\Omri\Desktop\records`, lessons)
+	fmt.Println(list)
 
 }
