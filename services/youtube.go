@@ -151,7 +151,8 @@ func uploadSingle(service *youtube.Service, vid models.Video) {
 	fmt.Println("Uploading.... ")
 	response, err := call.Media(file).Do()
 	handleError(err, "")
-	fmt.Printf("Upload successful! Video ID: %v\n", response.Id)
+	vid.Uploaded = true
+	fmt.Printf("Uploaded %s successful! Video ID: %v\n", vid.Title, response.Id)
 
 }
 

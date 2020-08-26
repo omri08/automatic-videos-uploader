@@ -1,20 +1,19 @@
 package main
 
 import (
-	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"os"
-	"youtube/models"
+	"youtube/events"
 	"youtube/services"
 )
 
 func main() {
 	jsonFile, _ := os.Open("./data/schedule.json")
+	defer jsonFile.Close()
 	data, _ := ioutil.ReadAll(jsonFile)
-	var lessons []models.Lesson
-	json.Unmarshal([]byte(data), &lessons)
+	lessons := services.JSONToLessonsArr(data)
 	list := services.ListVideos(`C:\Users\Omri\Desktop\records`, lessons)
-	fmt.Println(list)
+	services.UploadToYoutube(list)
+	events.VideosUploadedToYouTube(`C:\Users\Omri\Desktop\records`, list)
 
 }
