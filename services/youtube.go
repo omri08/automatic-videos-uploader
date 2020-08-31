@@ -11,6 +11,7 @@ import (
 	"os/user"
 	"path/filepath"
 	"strings"
+	"youtube/events"
 	"youtube/models"
 
 	"golang.org/x/net/context"
@@ -143,16 +144,24 @@ func uploadSingle(service *youtube.Service, vid models.Video) {
 	call := service.Videos.Insert(part, upload)
 
 	file, err := os.Open(vid.Path)
-	defer file.Close()
+
 	if err != nil {
-		log.Fatalf("Error opening %v: %v", vid.Path, err)
+		fmt.Printf("Error opening %v: %v", vid.Path, err)
+		return
 	}
 
 	fmt.Println("Uploading.... ")
 	response, err := call.Media(file).Do()
-	handleError(err, "")
-	vid.Uploaded = true
+
+	if err != nil {
+		fmt.Printf("Api Error, %v", err.Error())
+		file.Close()
+		return
+	}
+
 	fmt.Printf("Uploaded %s successful! Video ID: %v\n", vid.Title, response.Id)
+	file.Close()
+	events.VideosUploadedToYouTube(vid)
 
 }
 

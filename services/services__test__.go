@@ -6,6 +6,7 @@ import (
 	"youtube/models"
 )
 
+//TestSetVideoName tests the TestSetVideoName function
 func TestSetVideoName(t *testing.T) {
 	var tests = []struct {
 		fileName string

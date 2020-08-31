@@ -17,6 +17,5 @@ func (p Privacy) String() string {
 // Video contains all the fields we need for uploading a video
 type Video struct {
 	Path, Title, Description, Category, Keywords, FileName string
-	Uploaded                                               bool
 	Privacy                                                Privacy
 }

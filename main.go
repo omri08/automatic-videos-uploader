@@ -3,7 +3,6 @@ package main
 import (
 	"io/ioutil"
 	"os"
-	"youtube/events"
 	"youtube/services"
 )
 
@@ -14,6 +13,5 @@ func main() {
 	lessons := services.JSONToLessonsArr(data)
 	list := services.ListVideos(`C:\Users\Omri\Desktop\records`, lessons)
 	services.UploadToYoutube(list)
-	events.VideosUploadedToYouTube(`C:\Users\Omri\Desktop\records`, list)
 
 }

@@ -18,10 +18,10 @@ func ListVideos(dirPath string, lessons []models.Lesson) []models.Video {
 
 	for _, file := range files {
 		filePath := dirPath + `\` + file.Name()
-		privacy := models.Private
+		privacy := models.Unlisted
 		video := models.Video{
 			Path: filePath, Title: setVideoName(file.Name(), lessons),
-			Description: "Hi", Category: "22", Keywords: "", FileName: file.Name(), Uploaded: false, Privacy: privacy}
+			Description: "Hi", Category: "22", Keywords: "", FileName: file.Name(), Privacy: privacy}
 		list = append(list, video)
 
 	}
@@ -44,8 +44,8 @@ func setVideoName(fileName string, lessons []models.Lesson) string {
 				startDiff = timeRecorded.Sub(start)
 			}
 
-			println("%v", startDiff)
 			if startDiff.Minutes() <= 20 && end.After(timeRecorded) && startDiff.Hours() < 1 {
+
 				return fmt.Sprintf("%s - %d/%d", lesson.Name, timeRecorded.Day(), timeRecorded.Month())
 			}
 		}
