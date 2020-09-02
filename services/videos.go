@@ -5,7 +5,7 @@ import (
 	"io/ioutil"
 	"log"
 	"time"
-	"youtube/models"
+	"uploader/models"
 )
 
 //ListVideos list all the videos we need to upload

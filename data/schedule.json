@@ -1,26 +1,26 @@
 [
   {
     "name": "Model of computation",
+    "day": 2,
     "starts": 19,
-    "ends": 22,
-    "day": 2
+    "ends": 22
   },
   {
     "name": "Parallel computing - lecture",
+    "day": 0,
     "starts": 17,
-    "ends": 21,
-    "day": 0
+    "ends": 21
   },
   {
     "name": "Model of computation",
+    "day": 3,
     "starts": 17,
-    "ends": 21,
-    "day": 3
+    "ends": 21
   },
   {
     "name": "Parallel computing - practice",
+    "day": 5,
     "starts": 11,
-    "ends": 14,
-    "day": 5
+    "ends": 14
   }
 ]

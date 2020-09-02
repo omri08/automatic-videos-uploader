@@ -3,7 +3,7 @@ package services
 import (
 	"fmt"
 	"testing"
-	"youtube/models"
+	"uploader/models"
 )
 
 //TestSetVideoName tests the TestSetVideoName function

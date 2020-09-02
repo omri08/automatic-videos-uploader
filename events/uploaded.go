@@ -3,7 +3,7 @@ package events
 import (
 	"log"
 	"os"
-	"youtube/models"
+	"uploader/models"
 )
 
 // VideosUploadedToYouTube deletes videos that uploaded successfully

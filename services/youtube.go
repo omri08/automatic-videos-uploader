@@ -11,8 +11,8 @@ import (
 	"os/user"
 	"path/filepath"
 	"strings"
-	"youtube/events"
-	"youtube/models"
+	"uploader/events"
+	"uploader/models"
 
 	"golang.org/x/net/context"
 	"golang.org/x/oauth2"

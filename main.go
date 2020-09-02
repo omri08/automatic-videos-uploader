@@ -1,17 +1,18 @@
 package main
 
 import (
-	"io/ioutil"
+	"fmt"
 	"os"
-	"youtube/services"
+	"uploader/cmd"
 )
 
 func main() {
-	jsonFile, _ := os.Open("./data/schedule.json")
-	defer jsonFile.Close()
-	data, _ := ioutil.ReadAll(jsonFile)
-	lessons := services.JSONToLessonsArr(data)
-	list := services.ListVideos(`C:\Users\Omri\Desktop\records`, lessons)
-	services.UploadToYoutube(list)
+	must(cmd.RootCmd.Execute())
+}
 
+func must(err error) {
+	if err != nil {
+		fmt.Println(err.Error())
+		os.Exit(1)
+	}
 }
