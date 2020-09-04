@@ -150,7 +150,7 @@ func uploadSingle(service *youtube.Service, vid models.Video) {
 		return
 	}
 
-	fmt.Println("Uploading.... ")
+	fmt.Printf("Uploading %s ....\n", vid.Title)
 	response, err := call.Media(file).Do()
 
 	if err != nil {

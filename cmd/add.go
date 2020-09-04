@@ -18,7 +18,7 @@ var (
 		Run: func(cmd *cobra.Command, args []string) {
 			l := models.Lesson{Name: name, Day: day + 1, Starts: starts, Ends: ends}
 
-			if err := services.AddLessonToJSON(l); err != nil {
+			if err := services.AddLesson(l); err != nil {
 				fmt.Printf("%v\n", err)
 			} else {
 				fmt.Printf("Lesson added successfully")

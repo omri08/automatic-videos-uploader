@@ -9,8 +9,8 @@ import (
 
 var jsonPath = `C:\Users\Omri\go\src\youtube\data\schedule.json`
 
-//JSONToLessonsArr converts json data into lesson Array
-func JSONToLessonsArr() []models.Lesson {
+//LoadLessons converts json data into lesson Array
+func LoadLessons() []models.Lesson {
 	jsonFile, _ := os.Open(jsonPath)
 	defer jsonFile.Close()
 	data, _ := ioutil.ReadAll(jsonFile)
@@ -20,8 +20,8 @@ func JSONToLessonsArr() []models.Lesson {
 	return lessons
 }
 
-//AddLessonToJSON Addes a lessons to schedule.json
-func AddLessonToJSON(les models.Lesson) error {
+//AddLesson Addes a lessons to schedule.json
+func AddLesson(les models.Lesson) error {
 
 	jsonFile, err := os.OpenFile(jsonPath, os.O_RDWR, 777)
 	if err != nil {
