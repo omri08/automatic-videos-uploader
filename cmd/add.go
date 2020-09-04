@@ -16,7 +16,7 @@ var (
 		Short: "Adds a lesson to your schedule  ",
 
 		Run: func(cmd *cobra.Command, args []string) {
-			l := models.Lesson{Name: name, Day: day - 1, Starts: starts, Ends: ends}
+			l := models.Lesson{Name: name, Day: day + 1, Starts: starts, Ends: ends}
 
 			if err := services.AddLessonToJSON(l); err != nil {
 				fmt.Printf("%v\n", err)
