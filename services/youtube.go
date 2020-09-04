@@ -161,7 +161,7 @@ func uploadSingle(service *youtube.Service, vid models.Video) {
 
 	fmt.Printf("Uploaded %s successful! Video ID: %v\n", vid.Title, response.Id)
 	file.Close()
-	events.VideosUploadedToYouTube(vid)
+	events.VideoUploadedToYoutube(vid)
 
 }
 

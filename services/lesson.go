@@ -11,9 +11,16 @@ var jsonPath = `C:\Users\Omri\go\src\youtube\data\schedule.json`
 
 //LoadLessons converts json data into lesson Array
 func LoadLessons() []models.Lesson {
-	jsonFile, _ := os.Open(jsonPath)
+	jsonFile, err := os.Open(jsonPath)
 	defer jsonFile.Close()
-	data, _ := ioutil.ReadAll(jsonFile)
+	if err != nil {
+		return nil
+	}
+
+	data, err := ioutil.ReadAll(jsonFile)
+	if err != nil {
+		return nil
+	}
 	var lessons []models.Lesson
 	json.Unmarshal([]byte(data), &lessons)
 

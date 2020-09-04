@@ -6,8 +6,8 @@ import (
 	"uploader/models"
 )
 
-// VideosUploadedToYouTube deletes videos that uploaded successfully
-func VideosUploadedToYouTube(vid models.Video) {
+// VideoUploadedToYoutube deletes videos that uploaded successfully
+func VideoUploadedToYoutube(vid models.Video) {
 
 	if e := os.Remove(vid.Path); e != nil {
 		log.Fatal(e)
