@@ -2,6 +2,7 @@ package services
 
 import (
 	"encoding/json"
+
 	"io/ioutil"
 	"os"
 	"uploader/models"
@@ -57,4 +58,10 @@ func AddLesson(les models.Lesson) error {
 	}
 
 	return nil
+}
+
+//DeleteLesson delets a lesson from the jsonFile
+func DeleteLesson(lesName string) bool {
+	return true
+
 }
