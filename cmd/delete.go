@@ -14,7 +14,7 @@ var deleteCmd = &cobra.Command{
 
 	Run: func(cmd *cobra.Command, args []string) {
 		lesson := strings.Join(args, " ")
-		err := db.GlobalMySQL.DeleteLesson(lesson)
+		err := db.DB.DeleteLesson(lesson)
 		if err != nil {
 			fmt.Printf("%s deleted successfully\n", lesson)
 		} else {

@@ -12,7 +12,7 @@ var runCmd = &cobra.Command{
 	Use:   "run",
 	Short: "Run tell the program to start upload the videos",
 	Run: func(cmd *cobra.Command, args []string) {
-		lessons := db.GlobalMySQL.LoadLessons()
+		lessons := db.DB.LoadLessons()
 		if lessons == nil {
 			fmt.Printf("Error loading Lessons\n")
 

@@ -10,7 +10,7 @@ import (
 func main() {
 
 	must(cmd.RootCmd.Execute())
-	defer db.GlobalMySQL.DB.Close()
+	defer db.DB.Close()
 
 }
 

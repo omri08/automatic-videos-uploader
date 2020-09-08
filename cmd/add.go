@@ -18,7 +18,7 @@ var (
 		Run: func(cmd *cobra.Command, args []string) {
 
 			l := models.Lesson{Name: name, Day: day + 1, Starts: starts, Ends: ends}
-			if err := db.GlobalMySQL.AddLesson(l); err != nil {
+			if err := db.DB.AddLesson(l); err != nil {
 				fmt.Printf("failed adding lesson %v\n", err)
 			} else {
 				fmt.Printf("Lesson added successfully")

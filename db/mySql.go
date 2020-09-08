@@ -7,12 +7,7 @@ import (
 	"uploader/models"
 )
 
-//GlobalMySQL the only variable to interact with MySQL database
-var GlobalMySQL = &LessonServiceSQL{}
-
-func init() {
-	GlobalMySQL.InitDB()
-}
+var mySQL = &LessonServiceSQL{}
 
 // LessonServiceSQL implements LessonService with MySQL connection
 type LessonServiceSQL struct {
@@ -102,4 +97,9 @@ func (s LessonServiceSQL) DeleteLesson(name string) error {
 	}
 
 	return nil
+}
+
+//Close is closing the connection the the DataBase
+func (s LessonServiceSQL) Close() {
+	s.DB.Close()
 }
