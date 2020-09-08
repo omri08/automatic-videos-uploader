@@ -3,6 +3,7 @@ package db
 import (
 	"database/sql"
 	_ "github.com/go-sql-driver/mysql"
+	"uploader/config"
 	"uploader/models"
 )
 
@@ -19,8 +20,7 @@ type LessonServiceSQL struct {
 }
 
 func (s *LessonServiceSQL) connectToDb() error {
-	db, err := sql.Open("mysql",
-		"root:omri3ma1@tcp(127.0.0.1:3306)/")
+	db, err := sql.Open("mysql", config.UserName+":"+config.Password+"@tcp(127.0.0.1:3306)/")
 
 	if err != nil {
 		return err
