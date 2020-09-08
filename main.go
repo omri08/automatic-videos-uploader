@@ -4,10 +4,14 @@ import (
 	"fmt"
 	"os"
 	"uploader/cmd"
+	"uploader/db"
 )
 
 func main() {
+
 	must(cmd.RootCmd.Execute())
+	defer db.GlobalMySQL.DB.Close()
+
 }
 
 func must(err error) {

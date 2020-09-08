@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/spf13/cobra"
 	"strings"
-	"uploader/services"
+	"uploader/db"
 )
 
 // deleteCmd represents the delete command
@@ -14,8 +14,8 @@ var deleteCmd = &cobra.Command{
 
 	Run: func(cmd *cobra.Command, args []string) {
 		lesson := strings.Join(args, " ")
-		deleted := services.DeleteLesson(lesson)
-		if deleted {
+		err := db.GlobalMySQL.DeleteLesson(lesson)
+		if err != nil {
 			fmt.Printf("%s deleted successfully\n", lesson)
 		} else {
 			fmt.Printf("failed to deleted %s\n", lesson)

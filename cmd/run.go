@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 	"github.com/spf13/cobra"
+	"uploader/db"
 	"uploader/services"
 )
 
@@ -11,7 +12,7 @@ var runCmd = &cobra.Command{
 	Use:   "run",
 	Short: "Run tell the program to start upload the videos",
 	Run: func(cmd *cobra.Command, args []string) {
-		lessons := services.LoadLessons()
+		lessons := db.GlobalMySQL.LoadLessons()
 		if lessons == nil {
 			fmt.Printf("Error loading Lessons\n")
 

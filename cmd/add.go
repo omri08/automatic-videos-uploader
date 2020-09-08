@@ -3,8 +3,8 @@ package cmd
 import (
 	"fmt"
 	"github.com/spf13/cobra"
+	"uploader/db"
 	"uploader/models"
-	"uploader/services"
 )
 
 var (
@@ -16,10 +16,10 @@ var (
 		Short: "Adds a lesson to your schedule  ",
 
 		Run: func(cmd *cobra.Command, args []string) {
-			l := models.Lesson{Name: name, Day: day + 1, Starts: starts, Ends: ends}
 
-			if err := services.AddLesson(l); err != nil {
-				fmt.Printf("%v\n", err)
+			l := models.Lesson{Name: name, Day: day + 1, Starts: starts, Ends: ends}
+			if err := db.GlobalMySQL.AddLesson(l); err != nil {
+				fmt.Printf("failed adding lesson %v\n", err)
 			} else {
 				fmt.Printf("Lesson added successfully")
 			}
