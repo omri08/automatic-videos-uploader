@@ -1,21 +1,20 @@
-package services
+package pkg
 
 import (
 	"fmt"
 	"testing"
-	"uploader/models"
 )
 
 //TestSetVideoName tests the TestSetVideoName function
 func TestSetVideoName(t *testing.T) {
 	var tests = []struct {
 		fileName string
-		lessons  []models.Lesson
+		lessons  []Lesson
 		want     string
 	}{
-		{"2020-07-22 09-03-25", []models.Lesson{{Name: "IntroTo", Day: 3, Starts: 9, Ends: 11}, {Name: "Par", Day: 1, Starts: 13, Ends: 17}}, "IntroTo - 22/7"},
-		{"2020-07-22 09-03-25", []models.Lesson{{Name: "Par", Day: 3, Starts: 13, Ends: 17}, {Name: "IntroTo", Day: 3, Starts: 9, Ends: 11}}, "IntroTo - 22/7"},
-		{"2020-07-22 09-03-25", []models.Lesson{{}}, "2020-07-22 09-03-25"},
+		{"2020-07-22 09-03-25", []Lesson{{Name: "IntroTo", Day: 3, Starts: 9, Ends: 11}, {Name: "Par", Day: 1, Starts: 13, Ends: 17}}, "IntroTo - 22/7"},
+		{"2020-07-22 09-03-25", []Lesson{{Name: "Par", Day: 3, Starts: 13, Ends: 17}, {Name: "IntroTo", Day: 3, Starts: 9, Ends: 11}}, "IntroTo - 22/7"},
+		{"2020-07-22 09-03-25", []Lesson{{}}, "2020-07-22 09-03-25"},
 	}
 
 	for _, tt := range tests {

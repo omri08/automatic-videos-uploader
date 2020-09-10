@@ -1,9 +1,9 @@
-package cmd
+package cli
 
 import (
 	"fmt"
 	"github.com/spf13/cobra"
-	"uploader/db"
+	"uploader/internal/db"
 )
 
 // listCmd represents the list command

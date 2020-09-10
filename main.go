@@ -3,13 +3,12 @@ package main
 import (
 	"fmt"
 	"os"
-	"uploader/cmd"
-	"uploader/db"
+	"uploader/internal/cli"
+	"uploader/internal/db"
 )
 
 func main() {
-
-	must(cmd.RootCmd.Execute())
+	must(cli.RootCmd.Execute())
 	defer db.DB.Close()
 
 }

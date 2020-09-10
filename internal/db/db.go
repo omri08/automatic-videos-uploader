@@ -1,14 +1,14 @@
 package db
 
 import (
-	"uploader/models"
+	"uploader/pkg"
 )
 
 //LessonService is the interface to make the Lesson Model intercate with a database
 type LessonService interface {
 	InitDB() error
-	AddLesson(l models.Lesson) error
-	LoadLessons() []models.Lesson
+	AddLesson(l pkg.Lesson) error
+	LoadLessons() []pkg.Lesson
 	DeleteLesson(name string) error
 	Close()
 }

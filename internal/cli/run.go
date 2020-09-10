@@ -1,10 +1,10 @@
-package cmd
+package cli
 
 import (
 	"fmt"
 	"github.com/spf13/cobra"
-	"uploader/db"
-	"uploader/services"
+	"uploader/internal/db"
+	"uploader/pkg"
 )
 
 // runCmd represents the upload command
@@ -17,8 +17,8 @@ var runCmd = &cobra.Command{
 			fmt.Printf("Error loading Lessons\n")
 
 		} else {
-			list := services.ListVideos(`C:\Users\Omri\Desktop\records`, lessons)
-			services.UploadToYoutube(list)
+			list := pkg.ListVideos(`C:\Users\Omri\Desktop\records`, lessons)
+			pkg.UploadToYoutube(list)
 		}
 	},
 }

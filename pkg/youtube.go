@@ -1,4 +1,4 @@
-package services
+package pkg
 
 import (
 	"encoding/json"
@@ -11,8 +11,6 @@ import (
 	"os/user"
 	"path/filepath"
 	"strings"
-	"uploader/events"
-	"uploader/models"
 
 	"golang.org/x/net/context"
 	"golang.org/x/oauth2"
@@ -123,7 +121,7 @@ func checkParams(path, title, description, category, keywords, privacy *string) 
 	}
 
 }
-func uploadSingle(service *youtube.Service, vid models.Video) {
+func uploadSingle(service *youtube.Service, vid Video) {
 	privacy := vid.Privacy.String()
 	checkParams(&vid.Path, &vid.Title, &vid.Description, &vid.Category, &vid.Keywords, &privacy)
 	upload := &youtube.Video{
@@ -161,12 +159,12 @@ func uploadSingle(service *youtube.Service, vid models.Video) {
 
 	fmt.Printf("Uploaded %s successful! Video ID: %v\n", vid.Title, response.Id)
 	file.Close()
-	events.VideoUploadedToYoutube(vid)
+	VideoUploadedToYoutube(vid)
 
 }
 
 // UploadToYoutube uses the youtube api to upload a video to youtube
-func UploadToYoutube(list []models.Video) {
+func UploadToYoutube(list []Video) {
 	ctx := context.Background()
 
 	b, err := ioutil.ReadFile(`C:\Users\Omri\go\src\youtube\config\client_secret.json`)

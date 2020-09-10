@@ -1,16 +1,36 @@
-package services
+package pkg
 
 import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"os"
 	"time"
-	"uploader/models"
 )
 
+// Privacy of the video
+type Privacy int
+
+// The privacy options : public , unlisted ,  private
+const (
+	Public Privacy = iota
+	Unlisted
+	Private
+)
+
+func (p Privacy) String() string {
+	return [...]string{"public", "unlisted", "private"}[p]
+}
+
+// Video contains all the fields we need for uploading a video
+type Video struct {
+	Path, Title, Description, Category, Keywords, FileName string
+	Privacy                                                Privacy
+}
+
 //ListVideos list all the videos we need to upload
-func ListVideos(dirPath string, lessons []models.Lesson) []models.Video {
-	list := []models.Video{}
+func ListVideos(dirPath string, lessons []Lesson) []Video {
+	list := []Video{}
 	files, err := ioutil.ReadDir(dirPath)
 	if err != nil {
 		log.Fatal(fmt.Errorf("the path: %s was not found", dirPath))
@@ -18,8 +38,8 @@ func ListVideos(dirPath string, lessons []models.Lesson) []models.Video {
 
 	for _, file := range files {
 		filePath := dirPath + `\` + file.Name()
-		privacy := models.Unlisted
-		video := models.Video{
+		privacy := Unlisted
+		video := Video{
 			Path: filePath, Title: setVideoName(file.Name(), lessons),
 			Description: "Hi", Category: "22", Keywords: "", FileName: file.Name(), Privacy: privacy}
 		list = append(list, video)
@@ -29,7 +49,7 @@ func ListVideos(dirPath string, lessons []models.Lesson) []models.Video {
 	return list
 }
 
-func setVideoName(fileName string, lessons []models.Lesson) string {
+func setVideoName(fileName string, lessons []Lesson) string {
 
 	timeRecorded := StringToTime(fileName)
 	for _, lesson := range lessons {
@@ -52,4 +72,14 @@ func setVideoName(fileName string, lessons []models.Lesson) string {
 	}
 
 	return fileName
+}
+
+// VideoUploadedToYoutube deletes videos that uploaded successfully
+func VideoUploadedToYoutube(vid Video) {
+
+	if e := os.Remove(vid.Path); e != nil {
+		log.Fatal(e)
+	}
+	println("%S deleted successfully ", vid.Title)
+
 }

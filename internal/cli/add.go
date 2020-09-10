@@ -1,10 +1,10 @@
-package cmd
+package cli
 
 import (
 	"fmt"
 	"github.com/spf13/cobra"
-	"uploader/db"
-	"uploader/models"
+	"uploader/internal/db"
+	"uploader/pkg"
 )
 
 var (
@@ -17,7 +17,7 @@ var (
 
 		Run: func(cmd *cobra.Command, args []string) {
 
-			l := models.Lesson{Name: name, Day: day + 1, Starts: starts, Ends: ends}
+			l := pkg.Lesson{Name: name, Day: day + 1, Starts: starts, Ends: ends}
 			if err := db.DB.AddLesson(l); err != nil {
 				fmt.Printf("failed adding lesson %v\n", err)
 			} else {

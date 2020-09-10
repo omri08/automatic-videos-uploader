@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	_ "github.com/go-sql-driver/mysql"
 	"uploader/config"
-	"uploader/models"
+	"uploader/pkg"
 )
 
 var mySQL = &LessonServiceSQL{}
@@ -14,22 +14,23 @@ type LessonServiceSQL struct {
 	DB *sql.DB
 }
 
-func (s *LessonServiceSQL) connectToDb() error {
+func connectToDb() (*sql.DB, error) {
 	db, err := sql.Open("mysql", config.UserName+":"+config.Password+"@tcp(127.0.0.1:3306)/")
 
 	if err != nil {
-		return err
+		return db, err
 	}
 	println("Connected To DataBase")
-	s.DB = db
 
-	return nil
+	return db, err
 
 }
 
 //InitDB  connection to the database, REMEMBER TO CLOSE THE DATABASE!!!
 func (s *LessonServiceSQL) InitDB() error {
-	if err := s.connectToDb(); err != nil {
+	var err error
+	s.DB, err = connectToDb()
+	if err != nil {
 		return err
 	}
 
@@ -53,7 +54,7 @@ func (s *LessonServiceSQL) InitDB() error {
 }
 
 //AddLesson adds a lesson to Lesson table
-func (s *LessonServiceSQL) AddLesson(l models.Lesson) error {
+func (s *LessonServiceSQL) AddLesson(l pkg.Lesson) error {
 	stmt, err := s.DB.Prepare("INSERT INTO Lesson(name,day,starts,ends) VALUES(?,?,?,?)")
 	if err != nil {
 		return err
@@ -66,15 +67,15 @@ func (s *LessonServiceSQL) AddLesson(l models.Lesson) error {
 }
 
 //LoadLessons loads all the lessons in the Lesson table
-func (s LessonServiceSQL) LoadLessons() []models.Lesson {
+func (s LessonServiceSQL) LoadLessons() []pkg.Lesson {
 	rows, err := s.DB.Query("SELECT * from Lesson")
 	if err != nil {
 		return nil
 	}
-	var lessons []models.Lesson
+	var lessons []pkg.Lesson
 	defer rows.Close()
 	for rows.Next() {
-		var l models.Lesson
+		var l pkg.Lesson
 		err := rows.Scan(&l.Name, &l.Day, &l.Starts, &l.Ends)
 		if err != nil {
 			return nil
